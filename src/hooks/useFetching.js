@@ -27,7 +27,7 @@ const useFetching = (url) => {
 
   useEffect(() => {
     doFetch(url);
-  },[url]);
+  },[url, doFetch]);
   return [data, loading, error];
 };
 
