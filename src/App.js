@@ -1,27 +1,30 @@
-import useFetching from './hooks/useFetching';
-import './App.css';
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Navigate,
+  redirect,
+  Routes,
+} from "react-router-dom";
+import Search from "./components/Search";
+import "./App.css";
+import NotFound from "./components/NotFound";
 
 function App() {
-  const [data, loading, error] = useFetching('https://jsonplaceholder.typicode.com/sdpostssd')
-
-  if (error.status === true) {
-    return (
-      <div>{error.error}</div>
-    )
-  }
-  if (loading) {
-    return (
-      <div>Loading, please wait a moment</div>
-    )
-  }
   return (
-    <div className="App">
-      {data.map(item => <div>
-        <div>{item.id}</div>
-        <div>{item.title}</div>
-        <div>{item.body}</div>
-      </div>)}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<Navigate to="/search" replace={true} />}
+        />
+        <Route path="/search" element={<Search />}>
+          <Route path=":searchQuery" element={<Search />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
