@@ -1,24 +1,32 @@
-import {
-  useParams,
-  useSearchParams,
-  useNavigate,
-} from "react-router-dom";
+import { useMemo } from "react";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+import useFetching from "../hooks/useFetching";
+
+const URL = "https://6370ee800399d1995d86faeb.mockapi.io/api/movies";
 
 const Search = () => {
   const params = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const URLForFetching = useMemo(() => {
+    let newURL = `${URL}?${
+      params.searchQuery ? `name=${params.searchQuery}&` : ""
+    }${searchParams.toString()}`;
+    return newURL;
+  }, [params, searchParams]);
+
+  const [data, loading, error] = useFetching(`${URLForFetching}`);
+
   const genre = searchParams.get("genre") || "";
   const sortBy = searchParams.get("sortBy") || "";
-  const movieId = searchParams.get("movieId") || "";
 
   const onSearchSubmit = (e) => {
     e.preventDefault();
     navigate({
       pathname: `${e.target[0].value}`,
-      search: `${searchParams}`
-    })
+      search: `${searchParams}`,
+    });
   };
 
   const handleSelectChange = (e, type) => {
@@ -33,25 +41,45 @@ const Search = () => {
 
   return (
     <div>
-      <form onSubmit={onSearchSubmit}>
-        <input type="text" defaultValue={params.searchQuery} />
-      </form>
-      <select value={genre} onChange={(e) => handleSelectChange(e, "genre")}>
-        <option value="">Genre</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-      </select>
-      <select value={sortBy} onChange={(e) => handleSelectChange(e, "sortBy")}>
-        <option value="">Sort By</option>
-        <option value="Release Date">Release Date</option>
-        <option value="Name">Name</option>
-      </select>
+      <div>
+        <form onSubmit={onSearchSubmit}>
+          <input type="text" defaultValue={params.searchQuery} />
+        </form>
+        <select value={genre} onChange={(e) => handleSelectChange(e, "genre")}>
+          <option value="">Genre</option>
+          <option value="Electronic">Electronic</option>
+          <option value="Rap">Rap</option>
+          <option value="Hip Hop">Hip Hop</option>
+          <option value="Funk">Funk</option>
+          <option value="Metal">Metal</option>
+          <option value="Reggae">Reggae</option>
+          <option value="Country">Country</option>
+          <option value="Soul">Soul</option>
+        </select>
+        <select
+          value={sortBy}
+          onChange={(e) => handleSelectChange(e, "sortBy")}
+        >
+          <option value="">Sort By</option>
+          <option value="releaseDate">Release Date</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+      <div>
+        {loading ? (
+          <div>Loading</div>
+        ) : error ? (
+          <div> An error has occured </div>
+        ) : (
+          data.map((movie) => (
+            <div key={movie.id}>
+              <div>{movie.name}</div>
+              <div>{movie.genre}</div>
+              <div>{movie.releaseDate}</div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
