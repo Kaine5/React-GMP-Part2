@@ -1,9 +1,7 @@
 import {
   BrowserRouter,
   Route,
-  Link,
   Navigate,
-  redirect,
   Routes,
 } from "react-router-dom";
 import Search from "./components/Search";
