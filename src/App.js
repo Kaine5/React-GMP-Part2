@@ -4,7 +4,7 @@ import {
   Navigate,
   Routes,
 } from "react-router-dom";
-import Search from "./components/Search";
+import Search from "./components/Search/Search";
 import "./App.css";
 import NotFound from "./components/NotFound";
 

@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly according to the snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      <form>
+        <input
+          title="searchInput"
+          type="text"
+          value=""
+        />
+      </form>
+      <select>
+        <option
+          value=""
+        >
+          Genre
+        </option>
+        <option
+          value="Electronic"
+        >
+          Electronic
+        </option>
+        <option
+          value="Rap"
+        >
+          Rap
+        </option>
+        <option
+          value="Hip Hop"
+        >
+          Hip Hop
+        </option>
+        <option
+          value="Funk"
+        >
+          Funk
+        </option>
+        <option
+          value="Metal"
+        >
+          Metal
+        </option>
+        <option
+          value="Reggae"
+        >
+          Reggae
+        </option>
+        <option
+          value="Country"
+        >
+          Country
+        </option>
+        <option
+          value="Soul"
+        >
+          Soul
+        </option>
+      </select>
+      <select>
+        <option
+          value=""
+        >
+          Sort By
+        </option>
+        <option
+          value="releaseDate"
+        >
+          Release Date
+        </option>
+        <option
+          value="name"
+        >
+          Name
+        </option>
+      </select>
+    </div>
+    <div>
+      <div>
+        Loading
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

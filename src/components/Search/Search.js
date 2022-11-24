@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
-import useFetching from "../hooks/useFetching";
+import useFetching from "../../hooks/useFetching";
 
 const URL = "https://6370ee800399d1995d86faeb.mockapi.io/api/movies";
 
@@ -43,9 +43,9 @@ const Search = () => {
     <div>
       <div>
         <form onSubmit={onSearchSubmit}>
-          <input type="text" defaultValue={params.searchQuery} />
+          <input type="text" defaultValue={params.searchQuery} title="searchInput" />
         </form>
-        <select value={genre} onChange={(e) => handleSelectChange(e, "genre")}>
+        <select value={genre} onChange={(e) => handleSelectChange(e, "genre")} title="genreSelect">
           <option value="">Genre</option>
           <option value="Electronic">Electronic</option>
           <option value="Rap">Rap</option>
@@ -59,6 +59,7 @@ const Search = () => {
         <select
           value={sortBy}
           onChange={(e) => handleSelectChange(e, "sortBy")}
+          title="sortSelect"
         >
           <option value="">Sort By</option>
           <option value="releaseDate">Release Date</option>
