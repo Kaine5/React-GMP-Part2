@@ -42,10 +42,20 @@ const Search = () => {
   return (
     <div>
       <div>
-        <form onSubmit={onSearchSubmit}>
-          <input type="text" defaultValue={params.searchQuery} title="searchInput" />
+        <form onSubmit={onSearchSubmit} data-cy="form">
+          <input
+            type="text"
+            defaultValue={params.searchQuery}
+            title="searchInput"
+            data-cy="searchInput"
+          />
         </form>
-        <select value={genre} onChange={(e) => handleSelectChange(e, "genre")} title="genreSelect">
+        <select
+          value={genre}
+          onChange={(e) => handleSelectChange(e, "genre")}
+          title="genreSelect"
+          data-cy="genreSelect"
+        >
           <option value="">Genre</option>
           <option value="Electronic">Electronic</option>
           <option value="Rap">Rap</option>
@@ -60,13 +70,14 @@ const Search = () => {
           value={sortBy}
           onChange={(e) => handleSelectChange(e, "sortBy")}
           title="sortSelect"
+          data-cy="sortSelect"
         >
           <option value="">Sort By</option>
           <option value="releaseDate">Release Date</option>
           <option value="name">Name</option>
         </select>
       </div>
-      <div>
+      <div data-cy="searchResult">
         {loading ? (
           <div>Loading</div>
         ) : error ? (
